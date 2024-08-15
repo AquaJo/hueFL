@@ -76,9 +76,10 @@ if (!gotTheLock) {
           mainWindow.webContents.send('log', 'Update verfügbar!');
         });
 
-        autoUpdater.on('update-downloaded', () => {
+        autoUpdater.on('update-downloaded', async () => {
           console.log('Update heruntergeladen!');
-          mainWindow.webContents.send('log', 'Update heruntergeladen!');
+          mainWindow.webContents.send('log', 'Update heruntergeladen!'); // ()
+          await mainWindow.close();
           autoUpdater.quitAndInstall();
         });
 
