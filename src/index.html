@@ -1,0 +1,614 @@
+<!doctype html>
+<html>
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="default-src 'self';img-src 'self' data: https://w3.org/svg/2000"
+  />
+
+  <head>
+    <meta charset="UTF-8" />
+    <!--vex-styling/UI--Prompts,Alerts,Confirms...-->
+    <link rel="stylesheet" href="libs/vex/vex.min.css" />
+    <link rel="stylesheet" href="libs/vex/vex-theme-default.min.css" />
+    <script src="libs/vex/vex.combined.min.js"></script>
+
+    <link href="libs/bootstrap.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="libs/jquery.js"></script>
+
+    <script type="text/javascript" src="libs/tinycolor-min.js"></script>
+    <link rel="stylesheet" href="libs/color-picker.css" />
+    <script type="text/javascript" src="libs/color-picker.js"></script>
+
+    <script type="text/javascript" src="libs/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/static.css" />
+
+    <link rel="stylesheet" href="css/welcome.css" />
+    <link rel="stylesheet" href="css/ipFinder.css" />
+    <link rel="stylesheet" href="css/hueAuth.css" />
+    <link rel="stylesheet" href="css/mainPage.css" />
+    <link rel="stylesheet" href="css/devicesExamples.css" />
+    <link rel="stylesheet" href="libs/switch.css" />
+
+    <script defer src="pages/classes/settings.js"></script>
+
+    <script defer src="pages/pages.js"></script>
+    <script defer src="fetchCmds.js"></script>
+    <script defer src="files.js"></script>
+    <script defer src="pages/bridgeAuth.js"></script>
+    <script defer src="pages/welcomePage.js"></script>
+    <script defer src="pages/ipFinderResPage.js"></script>
+    <script defer src="pages/mainPage.js"></script>
+
+    <script defer src="pages/classes/devices.js"></script>
+    <script defer src="pages/classes/bootstrapList.js"></script>
+    <script defer src="pages/classes/rooms.js"></script>
+    <script defer src="pages/classes/menueModals.js"></script>
+
+    <script defer src="render.js"></script>
+    <title>hueFL</title>
+  </head>
+
+  <body>
+    <div id="particles-js"></div>
+    <script type="text/javascript" src="libs/particles.js"></script>
+    <script type="text/javascript" src="libs/particle-app.js"></script>
+
+    <div
+      class="modal fade noselect"
+      id="mainModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div id="mainModalContent" class="modal-content">
+          <div id="mainModalHeader" class="modal-header">
+            <h5 class="modal-title" id="mainModalTitle">Modal title</h5>
+            <button
+              id="mainModalClose"
+              type="button"
+              class="btn-close btn-close-white"
+              aria-label="Close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div id="mainModalText" class="modal-body"></div>
+          <div class="modal-footer">
+            <button
+              id="mainModalFooterBtn1"
+              type="button"
+              class="btn btn-secondary hiddenOwn"
+              data-bs-dismiss="modal"
+            >
+              Okay
+            </button>
+            <button
+              id="mainModalFooterBtn2"
+              type="button"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+            >
+              Okay
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="menueDiv">
+      <img
+        id="minimize"
+        src="./icons/minimize_white_24dp.svg"
+        draggable="false"
+      />
+      <div id="minimizeSupportDiv"></div>
+      <img id="close" src="./icons/close_white_24dp.svg" draggable="false" />
+    </div>
+    <div id="mainTitle" class="hiddenOwn">
+      <p class="mainTitle noselect">hueFL</p>
+      <br />
+    </div>
+    <div id="welcome-Page" class="hiddenOwn noselect">
+      <p id="welcome1_welcomePage" class="adviceText1">Welcome!</p>
+      <p id="directConnect_welcomePage" class="adviceText1">
+        connect to bridge to continue
+      </p>
+
+      <div id="input_welcomePage" class="input-group mb-3 centered">
+        <span class="input-group-text" id="basic-addon3">bridge's IP</span>
+
+        <input
+          type="text"
+          class="form-control"
+          id="IPInput"
+          aria-describedby="basic-addon3"
+        />
+      </div>
+      <button id="connectingViaIp" class="btn btn-primary">
+        Try connecting to bridge
+      </button>
+      <br />
+      <button id="autoConnecting" class="btn btn-primary">
+        Try automatic searching for bridge
+      </button>
+    </div>
+    <div id="ipFinder-Page" class="hiddenOwn noselect">
+      <p id="tryingFinding_ipFinder" class="adviceText1">trying to find IP</p>
+      <p id="reminder_ipFinder" class="adviceText1">
+        this process can take some seconds
+      </p>
+      <p id="iteratePrc_ipFinder" class="adviceText1">iterate-process:</p>
+      <p id="p_iterate_ipFinder" class="adviceText1">0</p>
+    </div>
+    <div id="ipFinderRes-Page" class="hiddenOwn">
+      <p id="p_resTitle_ipFinderRes" class="adviceText1"></p>
+      <p id="p_resIPText_ipFinderRes" class="adviceText1"></p>
+      <br />
+      <br />
+      <button id="btn_back_ipFinderRes" class="btn btn-primary">back</button>
+      <button id="btn_continue_ipFinderRes" class="btn btn-primary">
+        continue
+      </button>
+    </div>
+
+    <div id="hueAuth-Page" class="hiddenOwn noselect">
+      <br />
+      <p class="adviceText1">authentication needed</p>
+      <br />
+      <img id="img1_hueAuthPage" src="icons/cast_white_24dp.svg" />
+      <img id="img2_hueAuthPage" src="icons/arrow_forward_white_24dp.svg" />
+      <img id="img3_hueAuthPage" src="icons/verified_user_white_24dp.svg" />
+      <br />
+      <br />
+      <br />
+      <p class="adviceText1">please press the bridge's button</p>
+      <p id="reminder_hueAuthPage" class="adviceText1">
+        within 30 seconds, but don't hurry!
+      </p>
+      <br />
+      <p id="p_authTimer_bridgeAuth" class="adviceText1"></p>
+    </div>
+
+    <div id="hueAuthRes-Page" class="hiddenOwn noselect">
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <p class="adviceText1">authentication failed (◔_◔)</p>
+      <br />
+      <br />
+      <button id="btn_back_hueAuthFail" class="btn btn-primary">back</button>
+      <button id="btn_tryAgain_hueAuthFail" class="btn btn-success">
+        try again
+      </button>
+    </div>
+
+    <div id="main-Page" class="hiddenOwn">
+      <div
+        class="modal fade noselect"
+        id="menueModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div id="menueModalContent" class="modal-content">
+            <div id="menueModalHeader" class="modal-header">
+              <h5 class="modal-title" id="menueModalTitle">Modal title</h5>
+              <button
+                id="menueModalClose"
+                type="button"
+                class="btn-close btn-close-white"
+                aria-label="Close"
+                data-bs-dismiss="modal"
+              ></button>
+            </div>
+            <div id="menueModalText" class="modal-body">
+              <div id="menueModalCreateRoom" class="hiddenOwn">
+                <div id="menueModalAddRoom" class="input-group mb-3 centered">
+                  <span class="input-group-text" id="basic-addon3"
+                    >room name</span
+                  >
+
+                  <input
+                    id="menueModalInputCreateRoom"
+                    type="text"
+                    class="form-control"
+                    aria-describedby="basic-addon3"
+                  />
+                </div>
+
+                <p class="modalTitle1">choose belonging lights</p>
+                <div id="list_addRoom_wrapper">
+                  <a
+                    id="list_addRom_AExample"
+                    class="list-group-item list-group-item-action active selection hiddenOwn"
+                    data-toggle="list"
+                    href="#list-home"
+                    role="tab"
+                    aria-controls="home"
+                    >Home</a
+                  >
+                  <div
+                    class="list-group"
+                    id="list_addRoom"
+                    role="tablist"
+                  ></div>
+                </div>
+              </div>
+              <div id="errorLoadIds" class="hiddenOwn">
+                <div id="errorLoadIdsWrapper"></div>
+              </div>
+              <div id="deleteWarning" class="hiddenOwn">
+                Do you really want to delete this room?
+              </div>
+              <div id="renameRoom" class="hiddenOwn">
+                <div
+                  id="renameRoomInputWrapper"
+                  class="input-group mb-3 centered"
+                >
+                  <span class="input-group-text" id="basic-addon3"
+                    >new name</span
+                  >
+
+                  <input
+                    id="renameRoomInput"
+                    type="text"
+                    class="form-control"
+                    aria-describedby="basic-addon3"
+                  />
+                </div>
+              </div>
+              <div id="addLightRoom" class="hiddenOwn">
+                <div
+                  class="list-group"
+                  id="list_addLightRoom"
+                  role="tablist"
+                ></div>
+              </div>
+              <div id="setAmbiance">
+                <div
+                  id="list_setAmbiance_wrapper"
+                  class="list-group"
+                  role="tablist"
+                ></div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                id="menueModalCloseFooter1"
+                type="button"
+                class="btn btn-secondary hiddenOwn"
+                data-bs-dismiss="modal"
+              >
+                Okay
+              </button>
+              <button
+                id="menueModalCloseFooter"
+                type="button"
+                class="btn btn-primary"
+                data-bs-dismiss="modal"
+              >
+                Okay
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <i
+        class="material-icons hiddenOwn"
+        title="Java isn't installed! Be aware that essential functions won't work."
+        id="noJavaIcon"
+        >report</i
+      >
+
+      <div class="chromeMaterial hiddenOwn noselect" id="dropdownChrome">
+        <ul id="roomsMenueListDrop" class="listdrop roomsDropdown">
+          <li id="setAmbianceRooms" class="dropLI dropLIRooms">set ambiance</li>
+          <li id="turnOnLIRooms" class="dropLI dropLIRooms">turn all on</li>
+          <li id="turnOffLIRooms" class="dropLI dropLIRooms">turn all off</li>
+          <li id="addLightLIRooms" class="dropLI dropLIRooms">add new light</li>
+          <li id="renameLIRooms" class="dropLI dropLIRooms">rename</li>
+          <li id="deleteLIRooms" class="dropLI dropLIRooms">delete</li>
+        </ul>
+      </div>
+      <div
+        class="chromeMaterial hiddenOwn"
+        title="turn all lights on"
+        id="allOn"
+      ></div>
+      <div
+        class="chromeMaterial hiddenOwn"
+        title="turn all lights off"
+        id="allOff"
+      ></div>
+      <div
+        class="chromeMaterial hiddenOwn"
+        title="add new light"
+        id="addLight"
+      ></div>
+      <div class="chromeMaterial" id="refresh"></div>
+      <div
+        id="leftbar"
+        class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark noselect"
+      >
+        <hr id="hrBreak_leftbar" />
+        <span class="fs-4">Menue</span>
+
+        <hr />
+        <ul id="mainUL_leftbar" class="nav nav-pills flex-column mb-auto">
+          <li class="nav-item">
+            <a
+              id="mainHome"
+              href="#"
+              class="nav-link active"
+              aria-current="page"
+              draggable="false"
+            >
+              <img
+                id="homeWhite_leftBar"
+                src="icons/home_white_24dp.svg"
+                draggable="false"
+              />
+              Home
+            </a>
+          </li>
+          <li>
+            <a
+              id="mainSettings"
+              href="#"
+              class="nav-link text-white"
+              data-bs-toggle="collapse"
+              data-bs-target="#settings-collapse"
+              draggable="false"
+            >
+              <img
+                id="settingsWhite_leftbar"
+                src="icons/settings_white_24dp.svg"
+                draggable="false"
+              />
+              Settings
+            </a>
+            <div class="collapse" id="settings-collapse">
+              <ul
+                id="ulSettings_leftBar"
+                class="btn-toggle-nav list-unstyled fw-normal pb-1 small"
+              >
+                <li id="settings_General">
+                  <a href="#" class="link-light rounded" draggable="false"
+                    >General</a
+                  >
+                </li>
+                <li id="settings_Updates">
+                  <a href="#" class="link-light rounded" draggable="false"
+                    >Updates</a
+                  >
+                </li>
+                <li id="settings_Bridge">
+                  <a href="#" class="link-light rounded" draggable="false"
+                    >Bridge</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <a
+              id="mainAdd"
+              href="#"
+              class="nav-link text-white"
+              data-bs-toggle="collapse"
+              data-bs-target="#create-collapse"
+              draggable="false"
+            >
+              <img
+                id="addIcon_leftBar"
+                src="icons/add_circle_outline_white_24dp.svg"
+                draggable="false"
+              />
+              Add
+            </a>
+            <div class="collapse" id="create-collapse">
+              <ul
+                id="addUL_leftbar"
+                class="btn-toggle-nav list-unstyled fw-normal pb-1 small"
+              >
+                <li id="room_add">
+                  <a href="#" class="link-light rounded" draggable="false"
+                    >Room</a
+                  >
+                </li>
+                <li id="light_add">
+                  <a href="#" class="link-light rounded" draggable="false"
+                    >Light</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+        <div id="roomsDiv_leftbar">
+          <span class="fs-4" draggable="false">
+            <img
+              id="roomIcon_leftbar"
+              src="icons/meeting_room_white_24dp.svg"
+              draggable="false"
+            />
+            Rooms</span
+          >
+          <hr />
+          <div id="roomsDivRooms_leftbar" draggable="false">
+            <ul class="nav nav-pills flex-column mb-auto" draggable="false">
+              <li
+                id="roomsExample"
+                class="leftbar_roomsLI hiddenOwn"
+                draggable="false"
+              >
+                <a
+                  href="#"
+                  class="nav-link text-white leftbar_roomsA"
+                  draggable="false"
+                >
+                  example
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="home-mPage" class="hiddenOwn">
+      <div
+        class="modal fade"
+        id="exampleLightModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div id="mainModalContent" class="modal-content">
+            <div id="mainModalHeader" class="modal-header noselect">
+              <h5 class="modal-title" id="exampleLightModalTitle">
+                Modal title
+              </h5>
+              <button
+                id="exampleLightModalClose"
+                type="button"
+                class="btn-close btn-close-white"
+                aria-label="Close"
+                data-bs-dismiss="modal"
+              ></button>
+            </div>
+            <div id="exampleLightModalBody" class="modal-body">
+              <div id="colorpickerModal" class="colorpicker noselect"></div>
+              <div id="renameModal" class="input-group mb-3 centered noselect">
+                <span class="input-group-text" id="basic-addon3">new name</span>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="renameModalInput"
+                  aria-describedby="basic-addon3"
+                />
+              </div>
+              <div id="addToRoomModal" class="hiddenOwn noselect">
+                <p class="modalTitle1">choose room(s) to add to</p>
+                <div id="list_addLightRoom_wrapper">
+                  <a
+                    id="list_addLightRoom_AExample"
+                    class="list-group-item list-group-item-action active hiddenOwn"
+                    data-toggle="list"
+                    href="#list-home"
+                    role="tab"
+                    aria-controls="home"
+                    >Home</a
+                  >
+                  <div
+                    class="list-group"
+                    id="list_addToRoom"
+                    role="tablist"
+                  ></div>
+                </div>
+              </div>
+
+              <div id="exampleLightModalText"></div>
+            </div>
+            <div class="modal-footer noselect">
+              <button
+                id="exampleLightModalCloseText2"
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+                class="hiddenOwn"
+              >
+                create room
+              </button>
+              <button
+                id="exampleLightModalCloseText"
+                type="button"
+                class="btn btn-primary"
+                data-bs-dismiss="modal"
+              ></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr id="hrBreakExampleLight" />
+      <div id="breakLineDevicesMovement"></div>
+
+      <div id="exampleLight" class="row">
+        <div class="col-4">
+          <div id="list-tab" class="list-tab list-group" role="tablist">
+            <a
+              class="list-group-item list-group-item-action active list-home-list"
+              id="list-home-list"
+              data-toggle="list"
+              draggable="false"
+              href="#list-home"
+              role="tab"
+              aria-controls="home"
+            >
+              light
+              <input
+                type="range"
+                class="form-range customRange1"
+                id="customRange1"
+                min="0"
+                max="254"
+                value="254"
+              />
+            </a>
+            <a
+              class="list-group-item list-group-item-action list-profile-list"
+              id="list-profile-list"
+              data-toggle="list"
+              href="#list-profile"
+              role="tab"
+              aria-controls="profile"
+              draggable="false"
+              >add to room</a
+            >
+            <input
+              id="switchNightDay"
+              type="checkbox"
+              name="checkbox"
+              class="switch switchNightDay"
+            />
+            <img
+              id="iconErrorDevices"
+              class="iconErrorDevices"
+              src="icons/error_outline_white_24dp.svg"
+              title="not reachable"
+            />
+
+            <div id="dropmenueDiv" class="menudrop noselect dropmenueDiv">
+              <ul id="dropUL" class="listdrop">
+                <li class="dropLI">set color</li>
+                <li class="dropLI">set scene</li>
+                <li class="dropLI">rename global</li>
+                <li class="dropLI">get information</li>
+                <li class="dropLI redOwn hiddenOwn">remove from room</li>
+              </ul>
+            </div>
+            <div class="chromeMaterial senderSelectorChange hiddenOwn"></div>
+            <div class="chromeMaterial receiverSelectorChange hiddenOwn"></div>
+          </div>
+          <i
+            class="material-icons hiddenOwn"
+            title="Java isn't installed! Be aware that essential functions won't work."
+            id="activeSyncingIcon"
+            >radio_button_checked
+          </i>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

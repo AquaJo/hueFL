@@ -1,0 +1,13 @@
+printWidth: 80 # Maximum line length
+tabWidth: 2 # Number of spaces per tab
+useTabs: false # Use spaces instead of tabs
+semi: true # Add semicolons at the end of statements
+singleQuote: true # Use single quotes instead of double quotes
+quoteProps: 'as-needed' # Quote object properties only when required
+jsxSingleQuote: false # Use double quotes in JSX
+trailingComma: 'es5' # Add trailing commas where valid in ES5
+bracketSpacing: true # Add spaces between brackets in object literals
+#jsxBracketSameLine: false # Put `>` on a new line for multiline JSX
+arrowParens: 'always' # Always include parentheses around arrow function parameters
+proseWrap: 'preserve' # Maintain existing line breaks in Markdown files
+endOfLine: 'lf' # Use 'lf' (Line Feed) for line endings

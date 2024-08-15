@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="default-src 'self';img-src 'self' data: https://w3.org/svg/2000"
+  />
+
+  <head>
+    <link rel="stylesheet" href="../libs/vex/vex.min.css" />
+    <link rel="stylesheet" href="../libs/vex/vex-theme-default.min.css" />
+    <script src="../libs/vex/vex.combined.min.js"></script>
+
+    <script type="text/javascript" src="../libs/jquery.js"></script>
+    <link rel="stylesheet" href="../libs/color-picker.css" />
+    <link href="../libs/bootstrap.min.css" rel="stylesheet" />
+    <script
+      type="text/javascript"
+      src="../libs/bootstrap.bundle.min.js"
+    ></script>
+    <link rel="stylesheet" href="index.css" />
+    <meta charset="UTF-8" />
+    <title>hueFL-Settings</title>
+    <script src="../files.js"></script>
+    <script defer src="./cssConcepts.js"></script>
+    <script defer src="./script.js"></script>
+  </head>
+
+  <body>
+    <div id="menueDiv">
+      <img id="close" src="../icons/close_white_24dp.svg" draggable="false" />
+    </div>
+
+    <div
+      id="leftbar"
+      class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark noselect"
+    >
+      <span class="fs-4">Settings</span>
+
+      <hr />
+      <ul id="mainUL_leftbar" class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+          <a
+            id="general"
+            href="#"
+            class="nav-link text-white"
+            aria-current="page"
+            draggable="false"
+          >
+            <div
+              class="chromeMaterial leftbarSelectionImages"
+              id="generalImg"
+            ></div>
+            <p class="pAfterImg">General</p>
+          </a>
+        </li>
+        <br />
+        <br />
+        <li class="nav-item">
+          <a
+            id="updates"
+            href="#"
+            class="nav-link text-white"
+            aria-current="page"
+            draggable="false"
+          >
+            <div
+              class="chromeMaterial leftbarSelectionImages"
+              id="updatesImg"
+            ></div>
+            <p class="pAfterImg">Updates</p>
+          </a>
+        </li>
+        <br />
+        <br />
+        <li class="nav-item">
+          <a
+            id="bridge"
+            href="#"
+            class="nav-link text-white"
+            aria-current="page"
+            draggable="false"
+          >
+            <div
+              class="chromeMaterial leftbarSelectionImages"
+              id="bridgeImg"
+            ></div>
+            <p class="pAfterImg">Bridge</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div id="settingsContent" class="hidden">
+      <div id="generalContent">
+        <p class="titleContent">General</p>
+        <div id="generalContentMain">
+          <p class="subtitleContent">Ambiances</p>
+          <div class="contentDiv">
+            <p class="contentTextTitle">background syncing</p>
+            <hr class="smallhr" width="75%" />
+
+            <p class="contentText">maximum dimmable - brightness</p>
+            <!-- could have worked with bigger divs too -->
+            <div>
+              <input
+                id="maxValueDimmablesBackgroundSync_Input"
+                type="range"
+                id="volume"
+                name="volume"
+                min="0"
+                max="254"
+                class="inputRange1"
+              />
+              <label
+                id="maxValueDimmablesBackgroundSync_Label"
+                class="subtitleContent inputRangeLabel inputRange1_"
+                >1</label
+              >
+            </div>
+
+            <p class="contentText">minimum dimmable - brightness</p>
+            <div>
+              <input
+                id="minValueDimmablesBackgroundSync_Input"
+                type="range"
+                id="volume"
+                name="volume"
+                min="0"
+                max="254"
+                class="inputRange2"
+              />
+              <label
+                id="minValueDimmablesBackgroundSync_Label"
+                class="subtitleContent inputRangeLabel inputRange2_"
+                >1</label
+              >
+            </div>
+
+            <p class="contentText">
+              dimmable - sensitivity multiplier
+              <label>
+                <i
+                  class="material-icons questionMarkImg"
+                  data-bs-trigger="hover"
+                  data-toggle="popover"
+                  data-bs-content="Multiplies detected luminance, while being limited from above options (1 means we use the actual detected value). Effect of increasing this multiplier is a more sensitive dimmable lamp."
+                  >help</i
+                >
+              </label>
+            </p>
+            <div>
+              <input
+                id="dimmableMultiplierBackgroundSync_Input"
+                type="range"
+                id="volume"
+                name="volume"
+                min="0.1"
+                max="5"
+                step="0.1"
+                value="1"
+                class="inputRange4"
+              />
+              <label
+                id="dimmableMultiplierBackgroundSync_Label"
+                class="subtitleContent inputRangeLabel inputRange4_"
+                >1</label
+              >
+            </div>
+
+            <p id="luminanceTurnOff" class="contentText smallMarginTop">
+              turn off dimmables on low luminance<input
+                id="checkLuminanceTurnOff"
+                type="checkbox"
+                class="toggle check1"
+                checked
+              />
+            </p>
+            <p class="contentText check1_">
+              luminance turn off - treshold for dimmables
+            </p>
+            <div>
+              <input
+                id="luminanceTresholdForTurnOffBackgroundSync_Input"
+                type="range"
+                id="volume"
+                name="volume"
+                min="0"
+                max="254"
+                class="check1_ inputRange3"
+              />
+              <label
+                class="subtitleContent inputRangeLabel check1_ inputRange3_"
+                >1</label
+              >
+            </div>
+
+            <hr class="smallhr" width="75%" />
+
+            <div class="btnDiv expand1">
+              <a class="brk-btn">
+                advanced settings
+                <label>
+                  <i id="icon" class="material-icons advancedSettingsImg"
+                    >expand_more</i
+                  >
+                </label>
+              </a>
+            </div>
+            <div class="expand1_">
+              <p class="contentText">
+                needed luminace change rate for requesting bridge
+                <i
+                  class="material-icons questionMarkImg"
+                  data-bs-trigger="hover"
+                  data-toggle="popover"
+                  data-bs-content="Describes the needed change rate (in relation to the last value put to bridge) of the detected new luminance - value. The higher it is choosen, the more rare a new request to the bridge happens, the faster the bridge becomes. It can be helpful if dimmable - sensitivity is low or many lamps are in sync at the same time. 0 isn't recommened, because then even on no background change, new requests to the bridge are done each iteration, making it slow."
+                  >help</i
+                >
+              </p>
+              <div>
+                <input
+                  id="minLuminanceChangeRate_Input"
+                  type="range"
+                  id="volume"
+                  name="volume"
+                  min="0"
+                  max="100"
+                  value="20"
+                  class="inputRange5"
+                />
+                <label
+                  id="maxValueDimmablesBackgroundSync_Label"
+                  class="subtitleContent inputRangeLabel inputRange5_"
+                  >1</label
+                >
+              </div>
+
+              <p class="contentText">
+                needed rgb (sum) change for requesting bridge
+                <i
+                  class="material-icons questionMarkImg"
+                  data-bs-trigger="hover"
+                  data-toggle="popover"
+                  data-bs-content="Describes the needed change rate (in relation to the last value put to bridge) of the detected new rgb(red, green, blue)-sum - value. The higher it is choosen, the more rare a new request to the bridge happens, the faster the bridge becomes. It can be helpful if rgb(sum) - sensitivity is low or many lamps are in sync at the same time. 0 isn't recommened, because then even on no background change, new requests to the bridge are done each iteration, making it slow."
+                  >help</i
+                >
+              </p>
+              <div>
+                <input
+                  id="minRGBChangeRate_Input"
+                  type="range"
+                  id="volume"
+                  name="volume"
+                  min="0"
+                  max="10"
+                  value="1"
+                  class="inputRange6"
+                />
+                <label
+                  id="maxValueDimmablesBackgroundSync_Label"
+                  class="subtitleContent inputRangeLabel inputRange6_"
+                  >1</label
+                >
+              </div>
+            </div>
+
+            <div id="resetToDefaults" class="btnDiv reset">
+              <a class="brk-btn"> reset to defaults </a>
+            </div>
+          </div>
+          <hr />
+        </div>
+      </div>
+      <div id="bridgeContent">
+        <p class="titleContent">Bridge</p>
+      </div>
+      <div id="updatesContent">
+        <p class="titleContent">Updates</p>
+      </div>
+    </div>
+  </body>
+</html>

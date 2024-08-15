@@ -1,0 +1,29 @@
+#img1_hueAuthPage {
+    zoom: 5;
+    margin-right: 10px
+}
+
+#img2_hueAuthPage {
+    zoom: 5;
+}
+
+#img3_hueAuthPage {
+    zoom: 5;
+    margin-left: 10px
+}
+
+#reminder_hueAuthPage {
+    zoom: 0.8
+}
+#p_authTimer_bridgeAuth {
+    zoom: 0.8
+}
+
+
+
+#btn_back_hueAuthFail {
+    margin-right:20px;
+}
+#btn_tryAgain_hueAuthFail {
+    margin-left: 20px;
+}

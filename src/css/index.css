@@ -1,0 +1,360 @@
+@font-face {
+  font-family: Sora;
+  src: url('../fonts/Sora.ttf');
+}
+
+@font-face {
+  font-family: Material Icons;
+  src: url('../fonts/MaterialIcons-Regular.ttf');
+}
+
+*.noselect {
+  user-select: none;
+}
+
+body {
+  background-color: #130f40;
+  background-image: linear-gradient(315deg, #130f40 0%, #000000 74%);
+  text-align: center;
+  background-attachment: fixed;
+  overflow: hidden;
+  font-family: 'Sora';
+  /*edit*/
+}
+
+.hiddenOwn {
+  display: none;
+}
+
+input[type=range]::-ms-track {
+  width: 300px;
+  height: 5px;
+
+  /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+  background: transparent;
+
+  /*leave room for the larger thumb to overflow with a transparent border */
+  border-color: transparent;
+  border-width: 6px 0;
+
+  /*remove default tick marks*/
+  color: transparent;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 300px;
+  height: 5px;
+  background: #ddd;
+  border: none;
+  border-radius: 3px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: goldenrod;
+  margin-top: -4px;
+}
+
+input[type=range]:focus {
+  outline: none;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #ccc;
+}
+
+
+
+
+a {
+  text-decoration: none;
+}
+
+#minimize {
+  position: absolute;
+  zoom: 1.2;
+  left: 613px;
+  top: -3px;
+  -webkit-app-region: no-drag;
+  cursor:pointer;
+}
+
+
+#close {
+  position: absolute;
+  zoom: 1.2;
+  top: 0px;
+  left: 643px;
+  -webkit-app-region: no-drag;
+  cursor:pointer;
+}
+
+#close:hover {
+  /*background-color: red;*/
+  background: rgba(255, 0, 0, 0.8);
+}
+
+#minimize:hover {
+  background: rgba(99, 96, 96, 0.8);
+}
+
+
+
+
+/*a, u {
+  text-decoration: none;
+}
+a {
+  text-decoration: none !important;
+}*/
+
+#particles-js {
+  overflow: hidden;
+  position: fixed;
+  top: -80px;
+  left: -80px;
+  width: 120%;
+  height: 120%;
+  z-index: -1;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+  display: none;
+  /* make scrollbar transparent */
+}
+
+.mainTitle {
+  font-weight: 800;
+  font-size: 37px;
+  color: #f5f5f5;
+  margin-top: -13px
+}
+
+.adviceText1 {
+  font-weight: 400;
+  font-size: 33px;
+  color: #f5f5f5;
+  margin-bottom: 0.1
+}
+
+.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#mainModalText {
+  white-space: pre;
+  text-align: left;
+}
+
+#mainModalHeader {
+  color: white;
+  background-color: #323232;
+}
+
+#mainModalContent {
+  color: white;
+  background-color: #323232;
+}
+
+
+
+
+.noselect {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+
+.material-icons {
+  /* changed to this for later usage, before that used chromeMaterial class*/
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+.chromeMaterial {
+  font-family: 'Material Icons' !important;
+  font-feature-settings: 'liga';
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#refresh:before {
+  content: '\E5D5';
+  font-size: inherit;
+}
+
+#refresh:hover {
+  color: #A1E3F7 !important;
+}
+
+/*
+ this css part is by
+ Kyle Lavery (... with little changes by me)
+ https://codepen.io/kylelavery88
+ https://codepen.io/kylelavery88/pen/rewXQZ
+ Thanks!
+ */
+.menudrop,
+.menudrop:before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.menudrop:before,
+.dropLI:before {
+  font-family: 'Material Icons' !important;
+  font-feature-settings: 'liga';
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/*
+*, :before, :after {
+  box-sizing: border-box;
+  transition: 0.3s;
+}
+*/
+
+.menudrop {
+  background: #474747;
+  height: 56px;
+  width: 56px;
+  border-radius: 5px;
+  color: #E6E6E6;
+  font-size: 2em;
+  cursor: pointer;
+}
+
+.menudrop:before {
+  content: '\E5D2';
+  font-size: inherit;
+}
+
+.listdrop {
+  background: inherit;
+  /**/
+  background: #474747;
+  padding: 0.5em 0;
+  margin: 0;
+  margin-top: 1em;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  color: inherit;
+  font: 400 18px Roboto;
+  white-space: nowrap;
+  cursor: default;
+}
+
+.listdrop.hidden {
+  margin-top: 0.7em;
+  display: none;
+  opacity: 0;
+}
+
+.listdrop:before {
+  content: '';
+  width: 0.75em;
+  height: 0.75em;
+  background: inherit;
+  position: absolute;
+  top: -0.375em;
+  left: calc(56px / 2 - .375em);
+  transform: rotate(45deg);
+}
+
+.dropLI {
+  color: white !important;
+  list-style: none;
+  padding: 0.5em;
+  padding-left: 2.5em;
+  margin: 0;
+  position: relative;
+  cursor: pointer;
+}
+
+.dropLI:before {
+  position: absolute;
+  top: calc(5% + 8px);
+  left: 8px;
+}
+
+.dropLI:nth-child(1):before {
+  content: '\e40a';
+}
+
+.dropLI:nth-child(2):before {
+  content: '\e3f4';
+}
+
+.dropLI:nth-child(3):before {
+  content: '\e9a2';
+}
+
+.dropLI:nth-child(4):before {
+  content: '\e88e';
+}
+
+.dropLI:nth-child(5):before {
+  content: '\e15c';
+}
+
+.redOwn:before {
+  color: red !important;
+}
+
+.dropLI:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/**/

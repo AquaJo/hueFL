@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.target=ColorConvertion
+comment0.text=\r\n\ doing\ convertion\ stuff\ such\ as\ rgb\ to\ xy\ value\r\n
+comment1.params=r\ g\ b
+comment1.target=double[]\ rgbToXy(int,\ int,\ int)
+numComments=2

@@ -1,0 +1,19 @@
+#welcome1_welcomePage {
+    margin-top: 70px;
+}
+#directConnect_welcomePage {
+    margin: 25px;
+}
+
+
+#input_welcomePage {
+    width: 400px; left : 198px; margin-top: 26px 
+}
+
+#connectingViaIp {
+    margin-top: 8px
+}
+
+#autoConnecting {
+    margin-top: 38px
+}

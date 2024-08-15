@@ -1,0 +1,6 @@
+/node_modules
+/out
+/dist
+/src/java/communicator.json
+
+.env

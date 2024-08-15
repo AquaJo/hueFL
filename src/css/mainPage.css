@@ -1,0 +1,365 @@
+#refresh {
+    position: absolute;
+    top: 37px;
+    left: 116px;
+    z-index: 1000;
+    color: white;
+    zoom: 1.5;
+    cursor: pointer;
+}
+
+#leftbar {
+    position: absolute;
+    top: 0;
+    width: 190px;
+    height: 100%;
+}
+
+#hrBreak_leftbar {
+    visibility: hidden;
+    height: 8px
+}
+
+#mainUL_leftbar {
+    text-align: center;
+}
+
+#homeWhite_leftBar {
+    margin-top: -4px
+}
+
+#settingsWhite_leftbar {
+    margin-top: -4px
+}
+
+#ulSettings_leftBar {
+    margin-top: 7px
+}
+
+#addIcon_leftBar {
+    margin-top: -4px
+}
+
+#addUL_leftbar {
+    margin-top: 7px
+}
+
+#roomIcon_leftbar {
+    margin-top: -3px
+}
+
+#roomsDiv_leftbar {
+    position: relative;
+    top: -19px
+}
+
+#roomsDivRooms_leftbar {
+    margin-top: -11px;
+    height: 230px;
+    overflow-y: scroll;
+}
+
+#home-mPage {
+    height: 500px;
+    overflow-y: auto
+}
+
+#exampleLightModalBody {
+    text-align: left
+}
+
+
+
+
+.informationModalP {
+    line-height: 4px;
+}
+
+.informationModalSpan {
+    color: #A8AAAA
+}
+
+
+
+
+
+
+
+.informationHrBreak {
+    visibility: hidden;
+    margin-top: -8px
+}
+
+.indent_0 {
+    text-indent: 18px;
+}
+
+.indent_1 {
+    text-indent: 68px;
+}
+
+.indent_2 {
+    text-indent: 118px;
+}
+
+.indent_3 {
+    text-indent: 168px;
+}
+
+.indent_4 {
+    text-indent: 218px;
+}
+
+.col_00CED1 {
+    color: #00CED1;
+}
+
+.col_E3B448 {
+    color: #E3B448;
+}
+
+.col_CBD18F {
+    color: #CBD18F;
+}
+
+.col_3A6B35 {
+    color: #3A6B35;
+}
+
+
+
+
+
+
+#menueModalText {
+    text-align: left;
+}
+
+#menueModalHeader {
+    color: white;
+    background-color: #323232;
+}
+
+#menueModalContent {
+    color: white;
+    background-color: #323232;
+}
+
+#menueModalAddRoom {
+    height: 0px;
+    margin-top: -80px;
+    margin-left: 43px;
+    width: 376px;
+}
+
+#menueModalAddRoom span {
+    width: 95px;
+}
+
+
+#list_addRoom {
+    width: 200px;
+}
+
+#menueModalCreateRoom {
+    text-align: center;
+    max-height: 283px;
+}
+
+.modalTitle1 {
+    font-size: 21px;
+}
+
+#list_addRoom_wrapper {
+    margin-top: -50px;
+    height: 248px;
+    overflow-y: auto;
+}
+
+#list_addRoom {
+    margin-top: -73px;
+    margin-left: 85px;
+    width: 260px;
+}
+
+
+
+#dropdownChrome {
+    position: absolute;
+    top: 37px;
+    left: 160px;
+    z-index: 999 !important;
+    /*(!)*/
+    color: white;
+    zoom: 1.5;
+    cursor: pointer;
+    text-align: left;
+}
+
+.dropLIRooms:nth-child(1):before {
+    content: '\e3f4';
+}
+
+.dropLIRooms:nth-child(2):before {
+    content: '\E837';
+}
+
+.dropLIRooms:nth-child(3):before {
+    content: '\E836';
+}
+
+.dropLIRooms:nth-child(4):before {
+    content: '\e147';
+}
+
+.dropLIRooms:nth-child(5):before {
+    content: '\e9a2';
+}
+
+.dropLIRooms:nth-child(6):before {
+    content: '\e15c';
+    color: red;
+}
+
+
+
+
+#dropdownChrome:before {
+    content: '\E5C6';
+    font-size: inherit;
+}
+
+#dropdownChrome:hover {
+    color: #A1E3F7 !important;
+}
+
+.roomsDropdown {
+    zoom: 0.52;
+    left: 14px;
+    top: 24px;
+}
+
+
+#allOn {
+    position: absolute;
+    top: 37px;
+    left: 187px;
+    z-index: 1;
+    color: white;
+    zoom: 1.5;
+    cursor: pointer;
+}
+
+#allOn:before {
+    content: '\E837';
+    font-size: inherit;
+}
+
+#allOn:hover {
+    color: #A1E3F7 !important;
+}
+
+
+#allOff {
+    position: absolute;
+    top: 37px;
+    left: 205px;
+    z-index: 1;
+    color: white;
+    zoom: 1.5;
+    cursor: pointer;
+}
+
+#allOff:before {
+    content: '\E836';
+    font-size: inherit;
+}
+
+#allOff:hover {
+    color: #A1E3F7 !important;
+}
+
+#addLight {
+    position: absolute;
+    top: 37px;
+    left: 224px;
+    z-index: 1;
+    color: white;
+    zoom: 1.5;
+    cursor: pointer;
+}
+
+#addLight:before {
+    content: '\e147';
+    font-size: inherit;
+}
+
+#addLight:hover {
+    color: #A1E3F7 !important;
+}
+
+#renameRoomInputWrapper {
+    margin-left: 49px;
+    margin-top: 11px;
+    width: 360px;
+}
+
+#list_addLightRoom {
+    width: 320px;
+    margin-left: 55px;
+}
+
+#menueModalCloseFooter {
+    z-index: 5;
+}
+
+
+
+#breakLineDevicesMovement {
+    position: absolute;
+    left: 222px;
+    height: 2px;
+    width: 600px;
+    z-index: 1;
+    visibility: hidden;
+    background: lime;
+    /*visibility: hidden;*/
+}
+
+
+
+#list_setAmbiance_wrapper {
+    width: 434px;
+    background-color: black;
+}
+
+.list-group-item.normal {
+    background-color: #D0E9F4;
+    border-color: #D0E9F4;
+}
+
+.list-group-item.selection.active {
+    background-color: #1784A2;
+    border-color: #1784A2;
+}
+
+
+
+
+#noJavaIcon {
+    color: #FF7276;
+    position:absolute;
+    left:10px;
+    top:10px;
+    z-index: 3;
+    cursor: help;
+}
+
+
+#activeSyncingIcon {
+    position: relative;
+    left:-78px;
+    top:-160px;;
+    color:limegreen;
+    z-index:2;
+}

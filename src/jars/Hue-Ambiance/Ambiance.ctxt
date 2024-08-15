@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=Ambiance
+comment1.params=key2\ mode2\ objectKey2\ type2
+comment1.target=void\ register(java.lang.String,\ java.lang.String,\ int,\ java.lang.String)
+comment2.params=
+comment2.target=void\ delete()
+comment3.params=modeNew
+comment3.target=void\ changeTo(java.lang.String)
+comment4.params=delay
+comment4.target=void\ sleep(int)
+numComments=5

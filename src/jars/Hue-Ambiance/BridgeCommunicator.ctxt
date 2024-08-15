@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=BridgeCommunicator
+comment1.params=ip2\ apiKey2
+comment1.target=BridgeCommunicator(java.lang.String,\ java.lang.String)
+comment2.params=endPath
+comment2.target=com.google.gson.JsonObject\ get(java.lang.String)
+comment3.params=keyNumber\ r\ g\ b
+comment3.target=java.lang.String\ putColor(int,\ int,\ int,\ int)
+comment4.params=keyNumber\ bri
+comment4.target=java.lang.String\ putBrightness(int,\ int)
+comment5.params=url\ type
+comment5.target=java.net.HttpURLConnection\ getHttpConnection(java.lang.String,\ java.lang.String)
+comment6.params=url\ type\ reqbody
+comment6.target=void\ yourmethod(java.lang.String,\ java.lang.String,\ java.lang.String)
+numComments=7

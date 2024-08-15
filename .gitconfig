@@ -1,0 +1,2 @@
+[core]
+    hooksPath = .githooks # to apply this rule: run "git config core.hooksPath .githooks" yourself

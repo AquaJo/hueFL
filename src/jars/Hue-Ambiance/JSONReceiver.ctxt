@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=JSONReceiver
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=dir\ fileName
+comment2.target=void\ watchFile(java.lang.String,\ java.lang.String)
+comment3.params=
+comment3.target=void\ JSONModified()
+comment4.params=before
+comment4.target=java.lang.String\ toOriginal(java.lang.String)
+comment5.params=file
+comment5.target=java.lang.String\ readFileAsString(java.lang.String)
+comment6.params=
+comment6.target=java.util.HashMap\ communicatorJSONString()
+numComments=7
