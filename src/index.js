@@ -9,7 +9,7 @@ const path = require('path');
 let mainWindow;
 let settingsWindow;
 const gotTheLock = app.requestSingleInstanceLock();
-
+let updating_finish = false;
 if (!gotTheLock) {
   app.quit();
 } else {
@@ -79,6 +79,8 @@ if (!gotTheLock) {
         autoUpdater.on('update-downloaded', async () => {
           console.log('Update heruntergeladen!');
           mainWindow.webContents.send('log', 'Update heruntergeladen!'); // ()
+
+          updating_finish = true;
           // delete java process if existent before quitAndInstall!! --> using jarExec.pid
           try {
             process.kill(jarExec.pid); // could have also used spawn process for jarExec ...
@@ -354,6 +356,9 @@ if (!gotTheLock) {
                     './jars/Hue-Ambiance.jar',
                   (err, stdout, stderr) => {
                     if (err) {
+                      if (updating_finish) {
+                        return;
+                      }
                       mainWindow.webContents.send('noJavaAlert', ''); // also triggered on update due to process killing, but shouldn't matter
                       console.info(err);
                       //throw err;
