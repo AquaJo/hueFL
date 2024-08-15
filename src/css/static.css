@@ -1,17 +1,17 @@
 #menueDiv {
-    height: 28px;
-    -webkit-app-region: drag;
+  height: 28px;
+  -webkit-app-region: drag;
 }
 
 #minimizeSupportDiv {
-    width: 24px;
-    zoom: 1.2;
-    height: 3px;
-    background: rgba(99, 96, 96, 0.8);
-    position: absolute;
-    top: 21px;
-    left: 613px;
-    opacity: 0;
-    -webkit-app-region: no-drag;
-    cursor:pointer;
+  width: 24px;
+  zoom: 1.2;
+  height: 3px;
+  background: rgba(99, 96, 96, 0.8);
+  position: absolute;
+  top: 21px;
+  left: 613px;
+  opacity: 0;
+  -webkit-app-region: no-drag;
+  cursor: pointer;
 }

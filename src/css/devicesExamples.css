@@ -1,156 +1,151 @@
 #colorpickerModal {
-    width: 210px ;
-    margin-left: 5px ;
-    display: none 
+  width: 210px;
+  margin-left: 5px;
+  display: none;
 }
 
 #renameModal {
-    position: relative ;
-    display: none ;
-    left: 41px;
-    top: 27px 
+  position: relative;
+  display: none;
+  left: 41px;
+  top: 27px;
 }
 
 #basic-addon3 {
-    width: 80px 
+  width: 80px;
 }
 
 #renameModalInput {
-    top: -38px ;
-    left: 107px ;
-    width: 250px 
+  top: -38px;
+  left: 107px;
+  width: 250px;
 }
 
 #exampleLightModalCloseText {
-    z-index: 5 
+  z-index: 5;
 }
 
 #hrBreakExampleLight {
-    visibility: hidden ;
-    height: 3px 
+  visibility: hidden;
+  height: 3px;
 }
 
 .row {
-    margin-left: 236px ;
-    margin-top: -30px ;
-    display: none 
+  margin-left: 236px;
+  margin-top: -30px;
+  display: none;
 }
 
 .list-tab {
-    width: 500px ;
+  width: 500px;
 }
 
 .list-home-list {
-    font-size: 23px ;
-    cursor: pointer ;
-    z-index: 1 
+  font-size: 23px;
+  cursor: pointer;
+  z-index: 1;
 }
 
 .customRange1 {
-    margin-top: 10px !important;
-    color: black !important;
-    /*background: linear-gradient(to right, #82CFD0 0%, #82CFD0 50%, #fff 50%, #fff 100%) !important;*/
+  margin-top: 10px !important;
+  color: black !important;
+  /*background: linear-gradient(to right, #82CFD0 0%, #82CFD0 50%, #fff 50%, #fff 100%) !important;*/
 }
 
 .list-profile-list {
-    background-color: rgb(33, 37, 41) ;
-    color: white 
+  background-color: rgb(33, 37, 41);
+  color: white;
 }
 .list-profile-list:hover,
 .list-profile-list:focus {
-    color:white;
-    background-color:#49494A;
+  color: white;
+  background-color: #49494a;
 }
-
 
 .switchNightDay {
-    position: absolute ;
-    zoom: 0.65 ;
-    left: 685px ;
-    top: -204px ;
-    z-index: 2 ;
+  position: absolute;
+  zoom: 0.65;
+  left: 685px;
+  top: -204px;
+  z-index: 2;
 }
 
-
-
 .iconErrorDevices {
-    position: relative ;
-    top: -165px ;
-    left: 5px ;
-    height: 20px ;
-    width: 20px ;
-    z-index: 2 ;
-    visibility: hidden 
+  position: relative;
+  top: -165px;
+  left: 5px;
+  height: 20px;
+  width: 20px;
+  z-index: 2;
+  visibility: hidden;
 }
 
 .dropmenueDiv {
-    zoom: 0.8 ;
-    width: 0px ;
-    height: 0px ;
-    position: relative ;
-    top: -219px ;
-    left: 58px ;
-    text-align: left ;
+  zoom: 0.8;
+  width: 0px;
+  height: 0px;
+  position: relative;
+  top: -219px;
+  left: 58px;
+  text-align: left;
 }
 
 .listdrop {
-    margin-top: 30px ;
-    margin-left: -26px ;
+  margin-top: 30px;
+  margin-left: -26px;
 }
 
 .dropLI {
-    font-family: Sora ;
+  font-family: Sora;
 }
 
-
 #addToRoomModal {
-    text-align: center;
+  text-align: center;
 }
 
 #list_addToRoom {
-    margin-left:70px;
-    width:300px;
+  margin-left: 70px;
+  width: 300px;
 }
 #list_addLightRoom_wrapper {
-    max-height:360px;
-    overflow-y: auto;
+  max-height: 360px;
+  overflow-y: auto;
 }
 
 .senderSelectorChange {
-    position: relative ;
-    top: -129px ;
-    left: 43px ;
-    color: white;
-    z-index:2;
-    zoom: 1.5;
-    height:0px;
-    width:0px;
+  position: relative;
+  top: -129px;
+  left: 43px;
+  color: white;
+  z-index: 2;
+  zoom: 1.5;
+  height: 0px;
+  width: 0px;
 }
 .senderSelectorChange:before {
-    content: '\e8d6';
-    font-size: inherit;
+  content: '\e8d6';
+  font-size: inherit;
 }
 
 .receiverSelectorChange {
-    position: relative ;
-    top: -129px ;
-    left: 43px ;
-    color: lime;
-    z-index:2;
-    zoom: 1.5;
-    height:0px;
-    width:0px;
+  position: relative;
+  top: -129px;
+  left: 43px;
+  color: lime;
+  z-index: 2;
+  zoom: 1.5;
+  height: 0px;
+  width: 0px;
 }
 .receiverSelectorChange:before {
-    content: '\e1b7';
-    font-size: inherit;
+  content: '\e1b7';
+  font-size: inherit;
 }
 .exampleLightModalText {
-    user-select: "text" !important;
+  user-select: 'text' !important;
 }
 
-
 #exampleLightModalText {
-    overflow-y: auto;
-    max-height: 400px;
+  overflow-y: auto;
+  max-height: 400px;
 }

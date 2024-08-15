@@ -1,4 +1,5 @@
 # hueFL
+
 hueFL allows you to control Zigbee lamps and other devices controlled over a hue-bridge. All this comes shipped with a quite intuitive, minimal, sleek design & optional settings.\
 Requires Java for some huge features like desktop background color- & dimm- syncing.\
 Its a project from more than a year ago I decided to pay attention to again now to bring it to a **more** publishable & stable state.\
@@ -51,6 +52,7 @@ https://github.com/bgrins/TinyColor
 for the amazing js color manipulation and conversion tool (tinyColor)
 
 TODO:
+
 - // MAYBE FIX / REWRITE URL-HANDLING
 - UNAUTH API KEY!!!!
 - Maybe set asar to true again and fix its zip stuff or whatever the reason of breaking is (on github actions and preferably dev-local-wise)
