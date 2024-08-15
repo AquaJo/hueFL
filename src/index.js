@@ -79,7 +79,19 @@ if (!gotTheLock) {
         autoUpdater.on('update-downloaded', async () => {
           console.log('Update heruntergeladen!');
           mainWindow.webContents.send('log', 'Update heruntergeladen!'); // ()
-          await mainWindow.close();
+          // delete java process if existent before quitAndInstall!! --> using jarExec.pid
+          try {
+            process.kill(jarExec.pid);
+            console.log(`Java process with PID ${jarExec.pid} terminated.`);
+          } catch (error) {
+            console.info(
+              `Failed to terminate Java process with PID ${jarExec.pid}: ${error.message}. Maybe you were running an instance without java installed?`
+            );
+          }
+          let obj = {};
+          obj.deleteJavaProcess = '1';
+          setCommunicatorJSON([obj, '']);
+
           autoUpdater.quitAndInstall();
         });
 
