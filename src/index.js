@@ -81,7 +81,7 @@ if (!gotTheLock) {
           mainWindow.webContents.send('log', 'Update heruntergeladen!'); // ()
           // delete java process if existent before quitAndInstall!! --> using jarExec.pid
           try {
-            process.kill(jarExec.pid);
+            process.kill(jarExec.pid); // could have also used spawn process for jarExec ...
             console.log(`Java process with PID ${jarExec.pid} terminated.`);
           } catch (error) {
             console.info(
@@ -354,15 +354,16 @@ if (!gotTheLock) {
                     './jars/Hue-Ambiance.jar',
                   (err, stdout, stderr) => {
                     if (err) {
-                      mainWindow.webContents.send('noJavaAlert', '');
-                      throw err;
+                      mainWindow.webContents.send('noJavaAlert', ''); // also triggered on update due to process killing, but shouldn't matter
+                      console.info(err);
+                      //throw err;
                     }
                     console.log(stdout);
                     console.log(stderr);
                   }
                 );
                 //console.log(jarExec);
-                console.log('jarExec.pid:' + jarExec.pid);
+                console.log('jarExec.pid:' + jarExec.pid); // could have also used spawn process for jarExec ...
               }
             } else {
               // TODO: No Java installed
