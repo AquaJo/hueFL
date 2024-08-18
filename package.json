@@ -4,23 +4,27 @@
   "description": "abc",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron-forge start",
-    "s": "electron .",
-    "package": "electron-forge package",
-    "make": "electron-forge make",
-    "dist": "electron-builder",
-    "release": "electron-builder --publish onTag",
+    "start": "npm run bundle && node ./starterWatchdog.js",
+    "devNotWorking": "concurrently \"npm run bundleWatch\" \"nodemon --exec npm start\"",
+    "bundle": "vite build",
+    "bundleWatch": "vite build --watch",
+    "make": "node copyPackageJson.js && npm run bundle && electron-forge make",
+    "dist": "node copyPackageJson.js && npm run bundle && electron-builder",
+    "release": "npm run bundle && electron-builder --publish onTag",
     "pretty": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\"",
-    "prettyAll": "prettier --write ."
+    "prettyAll": "prettier --write .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "startWithForge": "electron-forge start",
+    "package": "electron-forge package",
+    "normalStart": "electron ."
   },
   "author": "AquaJo",
   "license": "MIT",
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
     "electron-updater": "^6.2.1",
-    "express": "^4.18.1",
-    "node-fetch": "^3.2.10"
+    "node-fetch": "^3.2.10",
+    "vue": "^3.4.38"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.65",
@@ -28,9 +32,17 @@
     "@electron-forge/maker-rpm": "^6.0.0-beta.65",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.65",
     "@electron-forge/maker-zip": "^6.0.0-beta.65",
+    "@vitejs/plugin-vue": "^5.1.2",
+    "concurrently": "^8.2.2",
     "electron": "^31.3.1",
     "electron-builder": "^24.6.3",
-    "prettier": "3.3.2"
+    "nodemon": "^3.1.4",
+    "prettier": "3.3.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tree-kill": "^1.2.2",
+    "vite": "^5.4.1",
+    "vite-plugin-css-injected-by-js": "^3.5.1"
   },
   "build": {
     "asar": false,

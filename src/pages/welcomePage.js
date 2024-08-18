@@ -188,7 +188,7 @@ document.addEventListener('keydown', async (event) => {
           callback: async function (data) {
             if (!data) {
               manualLoginOpen = false;
-              open;
+              open();
             } else {
               let ip = data.IP;
               if (ip !== undefined) {
@@ -296,7 +296,7 @@ document.addEventListener('keydown', async (event) => {
                   if (key !== undefined) {
                     let splitIp=ipResult.split("http://");
                     console.log("http://" + splitIp[splitIp.length-1] + "/api/" + key)
-                    await getData("http://" + splitIp[splitIp.length-1] + "/api/"+key+"/lights", settings.fetchTime) // 
+                    await getData("http://" + splitIp[splitIp.length-1] + "/api/"+key+"/lights", settings.fetchTime) //
                       .then(async (data) => {
                         try {
                           console.log(data[0].error);
@@ -316,7 +316,7 @@ document.addEventListener('keydown', async (event) => {
 
         }
       })
-      
+
 
       //
     }*/

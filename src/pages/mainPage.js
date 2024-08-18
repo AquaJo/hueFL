@@ -232,6 +232,7 @@ addMainLight.addEventListener('click', function (e) {
   vex.dialog.open({
     message: 'Sorry, this feature is not implemented yet!',
     buttons: [$.extend({}, vex.dialog.buttons.YES, { text: 'close' })],
+    callback: function (data) {},
   });
 });
 function menue_resetAll() {

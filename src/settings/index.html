@@ -1,11 +1,11 @@
 <!doctype html>
 <html>
-  <meta
-    http-equiv="Content-Security-Policy"
-    content="default-src 'self';img-src 'self' data: https://w3.org/svg/2000"
-  />
-
   <head>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; connect-src 'self' https://api.github.com; img-src 'self' data: https://w3.org/svg/2000; script-src 'self'; style-src 'self' 'unsafe-inline'"
+    />
+
     <link rel="stylesheet" href="../libs/vex/vex.min.css" />
     <link rel="stylesheet" href="../libs/vex/vex-theme-default.min.css" />
     <script src="../libs/vex/vex.combined.min.js"></script>
@@ -17,12 +17,14 @@
       type="text/javascript"
       src="../libs/bootstrap.bundle.min.js"
     ></script>
-    <link rel="stylesheet" href="index.css" />
     <meta charset="UTF-8" />
     <title>hueFL-Settings</title>
     <script src="../files.js"></script>
-    <script defer src="./cssConcepts.js"></script>
-    <script defer src="./script.js"></script>
+    <!--  <script defer src="./cssConcepts.js"></script>
+    <script defer src="./general.js"></script> -->
+    <script type="module" defer src="./dist/bundle.js"></script>
+    <!-- <script defer src="./script.js"></script> -->
+    <link rel="stylesheet" href="./index.css" />
   </head>
 
   <body>
@@ -275,6 +277,7 @@
       </div>
       <div id="updatesContent">
         <p class="titleContent">Updates</p>
+        <div id="updatesContentMain"></div>
       </div>
     </div>
   </body>

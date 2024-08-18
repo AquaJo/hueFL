@@ -53,6 +53,8 @@ for the amazing js color manipulation and conversion tool (tinyColor)
 
 TODO:
 
+- github actions with minimal install only
+- ABRUPT CLOSING WONT KILL JAVA PROCESS!!
 - // MAYBE FIX / REWRITE URL-HANDLING
 - UNAUTH API KEY!!!!
 - Maybe set asar to true again and fix its zip stuff or whatever the reason of breaking is (on github actions and preferably dev-local-wise)

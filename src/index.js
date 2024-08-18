@@ -1,11 +1,13 @@
 // main.js
 
 // Modules to control application life and create native browser window
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, shell } = require('electron');
 const { autoUpdater } = require('electron-updater');
 const { ipcMain } = require('electron');
 //Menu.setApplicationMenu(false)
 const path = require('path');
+const fs = require('fs');
+
 let mainWindow;
 let settingsWindow;
 const gotTheLock = app.requestSingleInstanceLock();
@@ -65,7 +67,20 @@ if (!gotTheLock) {
 
       // temporary update checking insert
       if (app.isPackaged) {
-        mainWindow.webContents.send(
+        autoUpdater.on('update-downloaded', async () => {
+          console.log('Update heruntergeladen!');
+          mainWindow.webContents.send('log', 'Update heruntergeladen!'); // ()
+
+          // delete java process if existent before quitAndInstall!! --> using jarExec.pid
+          deleteJavaProcess();
+          let obj = {};
+          obj.deleteJavaProcess = '1';
+          setCommunicatorJSON([obj, '']);
+
+          autoUpdater.quitAndInstall();
+        });
+
+        /*mainWindow.webContents.send(
           'log',
           'Giving you update information in the following.'
         );
@@ -80,16 +95,8 @@ if (!gotTheLock) {
           console.log('Update heruntergeladen!');
           mainWindow.webContents.send('log', 'Update heruntergeladen!'); // ()
 
-          updating_finish = true;
           // delete java process if existent before quitAndInstall!! --> using jarExec.pid
-          try {
-            process.kill(jarExec.pid); // could have also used spawn process for jarExec ...
-            console.log(`Java process with PID ${jarExec.pid} terminated.`);
-          } catch (error) {
-            console.info(
-              `Failed to terminate Java process with PID ${jarExec.pid}: ${error.message}. Maybe you were running an instance without java installed?`
-            );
-          }
+          deleteJavaProcess();
           let obj = {};
           obj.deleteJavaProcess = '1';
           setCommunicatorJSON([obj, '']);
@@ -103,7 +110,7 @@ if (!gotTheLock) {
             'log',
             `Fehler beim Überprüfen des Updates: ${err}`
           );
-        });
+        });*/
       } else {
         console.log('Running in development mode. Skipping update check.');
         mainWindow.webContents.send(
@@ -117,6 +124,23 @@ if (!gotTheLock) {
     // Open the DevTools.
     // mainWindow.webContents.openDevTools()
   };
+  process.on('exit', (code) => {
+    if (!updating_finish) {
+      console.log('Exit with code: ' + code);
+      deleteJavaProcess();
+    }
+  });
+  function deleteJavaProcess() {
+    updating_finish = true; // general finish flag in theory
+    try {
+      process.kill(jarExec.pid); // could have also used spawn process for jarExec ...
+      console.log(`Java process with PID ${jarExec.pid} terminated.`);
+    } catch (error) {
+      console.info(
+        `Failed to terminate Java process with PID ${jarExec.pid}: ${error.message}. Maybe you were running an instance without java installed?`
+      );
+    }
+  }
   // This method will be called when Electron has finished
   // initialization and is ready to create browser windows.
   // Some APIs can only be used after this event occurs.
@@ -166,6 +190,77 @@ if (!gotTheLock) {
   const fetch = (...args) =>
     import('node-fetch').then(({ default: fetch }) => fetch(...args));
   function ipcHandling() {
+    ipcMain.handle('installNewest', async () => {
+      autoUpdater.checkForUpdatesAndNotify(); // update should available nonetheless, but this we i can trigger universal install after every download!! (BUT KEEP IT IN MIND!)
+      // install will be happening from a separate listener
+    });
+    ipcMain.handle('upToDateCheck', async () => {
+      if (!app.isPackaged) return { status: 'dev' };
+      return new Promise((resolve, reject) => {
+        // Listener für das Update verfügbar
+        const handleUpdateAvailable = (info) => {
+          autoUpdater.removeListener('update-available', handleUpdateAvailable);
+          autoUpdater.removeListener(
+            'update-not-available',
+            handleUpdateNotAvailable
+          );
+          autoUpdater.removeListener('error', handleError);
+          resolve({ status: 'available', info });
+        };
+
+        // Listener für kein Update verfügbar
+        const handleUpdateNotAvailable = () => {
+          autoUpdater.removeListener('update-available', handleUpdateAvailable);
+          autoUpdater.removeListener(
+            'update-not-available',
+            handleUpdateNotAvailable
+          );
+          autoUpdater.removeListener('error', handleError);
+          resolve({ status: 'not-available' });
+        };
+
+        // Listener für Fehler
+        const handleError = (err) => {
+          autoUpdater.removeListener('update-available', handleUpdateAvailable);
+          autoUpdater.removeListener(
+            'update-not-available',
+            handleUpdateNotAvailable
+          );
+          autoUpdater.removeListener('error', handleError);
+          reject({ status: 'error', error: err.message });
+        };
+
+        // Hinzufügen der Listener
+        autoUpdater.on('update-available', handleUpdateAvailable);
+        autoUpdater.on('update-not-available', handleUpdateNotAvailable);
+        autoUpdater.on('error', handleError);
+
+        // Überprüfen auf Updates
+        autoUpdater.checkForUpdates();
+      });
+    });
+    ipcMain.handle('currentVersionInfo', async () => {
+      // only working on github & if you name tags vX.X.X in git and package.json X.X.X and if win is supported and mac etc. not linking to other releases ...
+      const packageJson = JSON.parse(
+        fs.readFileSync(__dirname + '/packageJsonCopy.json', 'utf8')
+      );
+      const publishConfig = packageJson.build.win.publish;
+      const providerObject = publishConfig.find(
+        (obj) => obj.hasOwnProperty('provider') && obj.provider === 'github'
+      );
+      const version = packageJson.version;
+      const owner = providerObject.owner;
+      const repo = providerObject.repo;
+      let releaseLink;
+      if (providerObject) {
+        releaseLink = `https://github.com/${owner}/${repo}/releases/tag/v${version}`;
+      }
+      const obj = { version, owner, repo, releaseLink };
+      return obj;
+    });
+    ipcMain.handle('openLink', async (event, link) => {
+      shell.openExternal(link);
+    });
     // IP STUFF
     ipcMain.handle('ip', async (event, data) => {
       const os = require('os');

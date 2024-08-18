@@ -2,5 +2,6 @@
 /out
 /dist
 /src/java/communicator.json
-
+/src/settings/dist
+/src/packageJsonCopy.json
 .env

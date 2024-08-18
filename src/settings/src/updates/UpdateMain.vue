@@ -1,0 +1,239 @@
+<template>
+  <div class="local">
+    <p class="subtitleContent">Local</p>
+    <div class="contentDiv">
+      <p class="contentTextTitle">Current Version</p>
+      <hr class="smallhr" width="75%" />
+      <VersionStat ref="currentVersionStat"></VersionStat>
+      <hr class="smallhr" width="75%" />
+      <div v-if="remotePossible && installButtonText" class="btnDiv reset">
+        <a
+          id="installBtn"
+          @click="installBtnClick"
+          @mouseover="hoverInstall = true"
+          @mouseleave="hoverInstall = false"
+          class="brk-btn"
+        >
+          {{ installButtonText }}
+          <label>
+            <i
+              class="material-icons installImgUpdates"
+              :style="{
+                color: hoverInstall ? '#FFCC00' : installCloudColor,
+              }"
+              >&#xe2c0;</i
+            ></label
+          ></a
+        >
+      </div>
+    </div>
+  </div>
+  <div v-if="remotePossible" class="remote">
+    <div class="contentDiv">
+      <div class="btnDiv expand2">
+        <a
+          @click="showRemotes = !showRemotes"
+          @mouseover="hoverExpand2 = true"
+          @mouseleave="hoverExpand2 = false"
+          class="brk-btn"
+        >
+          show remote versions
+          <label>
+            <i
+              class="material-icons advancedSettingsImg"
+              :style="{
+                color:
+                  hoverExpand2 || showRemotes
+                    ? '#FFCC00'
+                    : 'rgb(164, 174, 173)',
+              }"
+              >{{ showRemotes ? 'expand_less' : 'expand_more' }}</i
+            >
+          </label>
+        </a>
+      </div>
+      <hr style="height: 3px; visibility: hidden" />
+      <div
+        v-memo="versionsRef"
+        v-if="showRemotes"
+        v-for="version in versionsRef"
+        :key="version"
+      >
+        <p class="contentTextTitle">v{{ version }}</p>
+        <hr class="smallhr" width="75%" />
+        <VersionStat
+          :ref="(el) => updateMe(el, version)"
+          :id="'versionStat-' + version"
+        ></VersionStat>
+        <hr class="smallhr" width="75%" />
+        <hr style="height: 1px; visibility: hidden" />
+      </div>
+    </div>
+  </div>
+</template>
+<style>
+.contentText.up10 {
+  margin-top: -10px;
+}
+.contentText.up10.white-underline {
+  position: relative;
+}
+.white-underline {
+  position: relative;
+  display: inline-block; /* Damit sich das Pseudoelement auf den Text bezieht */
+}
+.white-underline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 3px;
+  width: 100%;
+  height: 1px;
+  background-color: rgb(164, 174, 173);
+  transform-origin: bottom;
+  transition: background-color 0.3s ease;
+}
+
+.white-underline:hover::before {
+  background-color: burlywood;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  width: 120px;
+  background-color: #fff;
+  color: #333;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  bottom: 170%; /* Position above the tooltip container */
+  left: 50%;
+  margin-left: -60px; /* Center the tooltip text */
+  opacity: 0;
+  transition:
+    opacity 0.3s ease,
+    bottom 0.3s ease;
+}
+.tooltip-container {
+  cursor: help;
+}
+.tooltip-container:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+  bottom: 120%; /* Show tooltip directly above the container */
+}
+</style>
+
+<script setup>
+import { ref, defineExpose, watch, nextTick } from 'vue';
+import VersionStat from './VersionStat.vue';
+const hoverExpand2 = ref(false);
+const hoverInstall = ref(false);
+const showRemotes = ref(false);
+const installCloudColor = ref('rgb(164, 174, 173)');
+const installButtonText = ref(null);
+let installButtonResponse = null;
+
+const currentVersionStat = ref(null);
+const remotePossible = ref(false);
+const versionsRef = ref([]);
+
+let owner;
+let repo;
+let reusableFetchObj;
+let startCounter = 0;
+async function start() {
+  if (startCounter > 0) return; // not really needed to call it everytime, but you can - on each settings-page opening it gets loaded once seems enough actually ...
+  versionsRef.value = [];
+  startCounter++;
+  let obj = await api.send('currentVersionInfo');
+  const version = obj.version;
+  owner = obj.owner;
+  repo = obj.repo;
+  reusableFetchObj = await currentVersionStat.value.reusableFetch(owner, repo); // just use this on one instance to get an reusable github fetch object
+  let versions = reusableFetchObj.data.map((obj) =>
+    obj['tag_name'].replace('v', '')
+  );
+  versionsRef.value = versions;
+  console.log(reusableFetchObj);
+  if (reusableFetchObj.success) {
+    remotePossible.value = true;
+    setInstallButton();
+  } else {
+    remotePossible.value = false;
+  }
+
+  currentVersionStat.value.update(reusableFetchObj, version); // update(fetchObj, version) OR update(owner, repo, version)
+}
+async function setInstallButton() {
+  installButtonResponse = await api.send('upToDateCheck');
+  const response = installButtonResponse;
+  if (response.status === 'available') {
+    installButtonText.value = 'Install newest version';
+  } else if (response.status === 'not-available') {
+    installButtonText.value = 'Up to date';
+    installCloudColor.value = 'rgb(96,133,93)';
+  } else if (response.status === 'error') {
+    installButtonText.value = 'error finding status';
+    installCloudColor.value = '#F90B31';
+  } else if (response.status === 'dev') {
+    installButtonText.value = 'in dev mode';
+    installCloudColor.value = '#111111';
+    installCloudColor.value = '#191919';
+  }
+}
+function installBtnClick() {
+  if (installButtonResponse.status === 'available') {
+    vex.dialog.open({
+      message: 'Do you want to start an automated Download and Install?',
+      buttons: [
+        $.extend({}, vex.dialog.buttons.YES, { text: 'Yes' }),
+        $.extend({}, vex.dialog.buttons.NO, { text: 'No' }),
+      ],
+      callback: function (yes) {
+        if (!yes) return;
+        animateInstallBtn();
+        api.send('installNewest');
+      },
+    });
+  } else if (installButtonResponse.status === 'not-available') {
+    vex.dialog.open({
+      message: 'You are already up to date! :)',
+      buttons: [$.extend({}, vex.dialog.buttons.YES, { text: 'close' })],
+    });
+  } else if (installButtonResponse.status === 'dev') {
+    vex.dialog.open({
+      message: 'you should be in dev mode rn ... :)',
+      buttons: [$.extend({}, vex.dialog.buttons.YES, { text: 'close' })],
+    });
+  } else if (installButtonResponse.status === 'downloading') {
+    vex.dialog.open({
+      message:
+        'We are currently in the process of downloading the update. After that an install will start.',
+      buttons: [$.extend({}, vex.dialog.buttons.YES, { text: 'close' })],
+    });
+  }
+}
+
+function animateInstallBtn() {
+  installButtonResponse.status = 'downloading';
+  document.getElementById('installBtn');
+  installButtonText.value = 'Downloading ...';
+  setInterval(function () {
+    installBtn.classList.toggle('hover');
+  }, 490);
+}
+
+const updateMe = (element, version) => {
+  if (element) {
+    // can be null when it gets deleted ...
+    element.update(reusableFetchObj, version);
+  }
+};
+
+defineExpose({
+  start,
+});
+</script>

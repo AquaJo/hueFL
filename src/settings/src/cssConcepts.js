@@ -1,4 +1,4 @@
-// javascript for handling elements according their css classes
+// javascript for handling elements according their css classes // only working for elements available on start
 let all = document.getElementsByTagName('*');
 let switches = [];
 let inputRanges = [];

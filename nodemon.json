@@ -1,0 +1,4 @@
+{
+  "ignore": ["src/jars/communicator.json", "src/settings/src"],
+  "ext": "ts, js, json, html, htm, css, scss, jar, java, class, ctxt"
+}
