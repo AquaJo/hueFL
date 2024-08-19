@@ -176,7 +176,7 @@ async function setInstallButton(versionMe, versionRemote, prerelease) {
   if (comparedVersionResult > 0 && !prerelease) {
     installButtonText.value = 'Install newest version';
     installButtonResponse.status = 'available';
-  } else if (comparedVersionResult == 0) {
+  } else if (comparedVersionResult == 0 || prerelease) {
     installButtonText.value = 'Up to date';
     installCloudColor.value = 'rgb(96,133,93)';
     installButtonResponse.status = 'not-available';
@@ -207,7 +207,12 @@ function installBtnClick() {
   if (!installButtonResponse.status) return;
   if (installButtonResponse.status === 'available') {
     vex.dialog.open({
-      message: 'Do you want to start an automated Download and Install?',
+      unsafeMessage: `
+    <p>Would you like to initiate an automated download and installation process?</p>
+    <p style="font-size: smaller;">
+      Please note that if you are using the portable version, this will be a standard installation rather than a portable one. Alternatively, you can manually download and install the latest version from the GitHub releases page.
+    </p>
+  `,
       buttons: [
         $.extend({}, vex.dialog.buttons.YES, { text: 'Yes' }),
         $.extend({}, vex.dialog.buttons.NO, { text: 'No' }),
