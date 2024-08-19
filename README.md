@@ -49,7 +49,8 @@ _Amazingly big Thanks to_
 
 # Todo
 
-- github actions with minimal install only
+- Improve dev-experience
+- Set asar to true again and fix regarding problem (zip-version?)
+- Github actions with minimal install only
 - Fix - abrupt closing program causes java still running
 - URL-Pipe-Rewriting
-- set asar to true again and fix regarding problem (zip-version?)
