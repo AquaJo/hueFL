@@ -1,5 +1,5 @@
 <img align= "left" src="build/hueFL-md.png#gh-dark-mode-only" width="250">
-<img align= "left" src="build/hueFL-md.png#gh-light-mode-only" width="250">
+<img align= "left" src="build/hueFL-md-inv.png#gh-light-mode-only" width="250">
 <br><br><br><br><br><br>
 
 hueFL allows you to control Zigbee lamps and other devices controlled over a hue-bridge. All this comes shipped with a quite intuitive, minimal, sleek design & optional settings.\
