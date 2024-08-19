@@ -1,7 +1,13 @@
 {
   "name": "huefl",
   "version": "0.8.5",
-  "description": "abc",
+  "description": "the minimalistic & intuitive way to control your lights",
+  "author": "AquaJo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AquaJo/hueFL.git"
+  },
   "main": "src/index.js",
   "scripts": {
     "start": "npm run bundle && node ./starterWatchdog.js",
@@ -18,8 +24,6 @@
     "package": "electron-forge package",
     "normalStart": "electron ."
   },
-  "author": "AquaJo",
-  "license": "MIT",
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
     "electron-updater": "^6.2.1",
@@ -48,7 +52,10 @@
     "productName": "hueFL",
     "asar": false,
     "win": {
-      "target": "nsis",
+      "target": [
+        "nsis",
+        "portable"
+      ],
       "publish": [
         {
           "provider": "github",
@@ -56,6 +63,15 @@
           "repo": "hueFL"
         }
       ]
+    },
+    "nsis": {
+      "artifactName": "${productName} Setup ${version}_nsis.${ext}",
+      "installerIcon": "build/darkMode.ico",
+      "uninstallerIcon": "build/darkMode.ico",
+      "uninstallDisplayName": "hueFL Uninstaller"
+    },
+    "portable": {
+      "artifactName": "${productName} ${version}_portable.${ext}"
     }
   },
   "config": {

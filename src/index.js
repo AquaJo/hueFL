@@ -31,6 +31,7 @@ if (!gotTheLock) {
         autoHideMenuBar: true,
         allowEval: false,
       },
+      icon: 'favicon.ico',
       resizable: false,
     });
 
@@ -246,10 +247,15 @@ if (!gotTheLock) {
       });
     });
     ipcMain.handle('currentVersionInfo', async () => {
+      const filePath = path.join(__dirname, 'packageJsonCopy.json');
+      const fallbackFilePath = path.join(__dirname, '../', 'package.json');
       // only working on github & if you name tags vX.X.X in git and package.json X.X.X and if win is supported and mac etc. not linking to other releases ...
-      const packageJson = JSON.parse(
-        fs.readFileSync(__dirname + '/packageJsonCopy.json', 'utf8')
-      );
+      let packageJson;
+      if (fs.existsSync(filePath)) {
+        packageJson = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+      } else {
+        packageJson = JSON.parse(fs.readFileSync(fallbackFilePath, 'utf8'));
+      }
       const publishConfig = packageJson.build.win.publish;
       const providerObject = publishConfig.find(
         (obj) => obj.hasOwnProperty('provider') && obj.provider === 'github'

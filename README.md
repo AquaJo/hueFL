@@ -1,61 +1,55 @@
-# hueFL
+<img align= "left" src="build/darkMode.svg" width="105">
+<br>
+<p style = "font-size:60px"">ueFL</p>
 
 hueFL allows you to control Zigbee lamps and other devices controlled over a hue-bridge. All this comes shipped with a quite intuitive, minimal, sleek design & optional settings.\
 Requires Java for some huge features like desktop background color- & dimm- syncing.\
-Its a project from more than a year ago I decided to pay attention to again now to bring it to a **more** publishable & stable state.\
-Its not exactly there where I wanted it, but at the moment I have some other projects running ^^
+It's a project from over a year ago that I've decided to revisit now, with the goal of refining it into a **more** publishable and stable state.\
+Its not exactly there where I wanted it, but at the moment I have some other projects running ^^\
+Use this software on your own "risk".
 
-You already know your api-key and bridge IP-address? -> feel free to press "k" for manual login
+# Install
 
-credits:
+Check out the [releases](https://github.com/AquaJo/hueFL/releases) and feel free to install the latest version.\
+Else you can build it yourself, [here](#build).\
+If you already know your api-key and bridge-IP feel free to press `k` for manual login.
 
-_Thanks to_
+# Build
 
-**according styling:**
+I used [Electron-Builder & Electron-Updater](https://www.electron.build/) for building.\
+Therefore the `npm run dist` is the main way of building the application.
 
-Ahmad Emran:
-https://codepen.io/ahmadbassamemran
-https://codepen.io/ahmadbassamemran/pen/yLBXBmy
+If you want to compile the [java-code](src/jars/Hue-Ambiance) feel free to use e.g. BlueJ.
 
-for the amazing day/night toggle-switch
+# Dev
 
-Vincent Garreau:
-https://github.com/VincentGarreau
-https://github.com/VincentGarreau/particles.js
+Dev experience isn't the nicest as of now. You need bundle setting's js-files before `electron .` when working in settings.\
+Also `Ctrl+C` might not stop the java process. Feel free to manually close the application like its end-user intended.
 
-for the amazing particle - background effect (particle.js)
+# Credits
 
-Aaron Iker
-https://codepen.io/aaroniker
-https://codepen.io/aaroniker/pen/NLjmdz
+_Amazingly big Thanks to_
 
-for the amazing color-picker (including js/css/html)
+- **according styling:**
+  - [Ahmad Emran](https://codepen.io/ahmadbassamemran) - [day & toggle-switch](https://codepen.io/ahmadbassamemran/pen/yLBXBmy)
+  - [Vincent Garreau](https://github.com/VincentGarreau) - [Particle.js](https://github.com/VincentGarreau/particles.js)
+  - [Aaron Iker](https://codepen.io/aaroniker) - [color-picker (including js & css & html)](https://codepen.io/aaroniker/pen/NLjmdz)
+  - [Andreas Storm](https://codepen.io/avstorm) - [toggle-switch (used in settings)](https://codepen.io/avstorm/pen/jOEpBLW)
+  - [yourpalnurav](https://codepen.io/yourpalnurav) - [animated button (used in settings)](https://codepen.io/yourpalnurav/pen/LqNmzL)
+  - **...**
+  ***
+  - [Hubspot's](https://github.com/hubspot) [Vex](https://github.com/hubspot/vex) for their nice alerts
+  - [Bootstrap](https://github.com/twbs/bootstrap) for nice content - building
+  - [Google](https://www.google.com/) for their nice [Material-Icons](https://fonts.google.com/icons) and [Fonts](https://fonts.google.com/) :]
+  - **...**
+- **according libs:**
 
-Andreas Storm
-https://codepen.io/avstorm
-https://codepen.io/avstorm/pen/jOEpBLW
+  - [Brian Grinstead](https://github.com/bgrins) - [tinyColor-tool](https://github.com/bgrins/TinyColor)
+  - **...**
 
-for the amazing toggle switch (used in settings)
-
-yourpalnurav
-https://codepen.io/yourpalnurav
-https://codepen.io/yourpalnurav/pen/LqNmzL
-
-for the amazing button (used in settings)
-
-**according libs:**
-
-Brian Grinstead:
-https://github.com/bgrins
-https://github.com/bgrins/TinyColor
-
-for the amazing js color manipulation and conversion tool (tinyColor)
-
-TODO:
+# Todo
 
 - github actions with minimal install only
-- ABRUPT CLOSING WONT KILL JAVA PROCESS!!
-- // MAYBE FIX / REWRITE URL-HANDLING
-- UNAUTH API KEY!!!!
-- Maybe set asar to true again and fix its zip stuff or whatever the reason of breaking is (on github actions and preferably dev-local-wise)
-- `git config core.hooksPath .githooks`
+- Fix - abrupt closing program causes java still running
+- URL-Pipe-Rewriting
+- set asar to true again and fix regarding problem (zip-version?)

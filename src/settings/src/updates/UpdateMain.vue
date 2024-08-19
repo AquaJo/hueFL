@@ -153,13 +153,14 @@ async function start() {
   owner = obj.owner;
   repo = obj.repo;
   reusableFetchObj = await currentVersionStat.value.reusableFetch(owner, repo); // just use this on one instance to get an reusable github fetch object
-  let versions = reusableFetchObj.data.map((obj) =>
-    obj['tag_name'].replace('v', '')
-  );
-
-  versionsRef.value = versions;
   console.log(reusableFetchObj);
   if (reusableFetchObj.success) {
+    let versions = reusableFetchObj.data.map((obj) =>
+      obj['tag_name'].replace('v', '')
+    );
+
+    versionsRef.value = versions;
+
     remotePossible.value = true;
     setInstallButton(version, versions[0], reusableFetchObj.data[0].prerelease);
   } else {
