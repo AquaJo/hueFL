@@ -156,19 +156,36 @@ async function start() {
   let versions = reusableFetchObj.data.map((obj) =>
     obj['tag_name'].replace('v', '')
   );
+
   versionsRef.value = versions;
   console.log(reusableFetchObj);
   if (reusableFetchObj.success) {
     remotePossible.value = true;
-    setInstallButton();
+    setInstallButton(version, versions[0], reusableFetchObj.data[0].prerelease);
   } else {
     remotePossible.value = false;
   }
 
   currentVersionStat.value.update(reusableFetchObj, version); // update(fetchObj, version) OR update(owner, repo, version)
 }
-async function setInstallButton() {
-  installButtonResponse = await api.send('upToDateCheck');
+async function setInstallButton(versionMe, versionRemote, prerelease) {
+  installButtonResponse = {};
+  const comparedVersionResult = compareVersions(versionRemote, versionMe);
+  console.log(versionMe, versionRemote, prerelease);
+  if (comparedVersionResult > 0 && !prerelease) {
+    installButtonText.value = 'Install newest version';
+    installButtonResponse.status = 'available';
+  } else if (comparedVersionResult == 0) {
+    installButtonText.value = 'Up to date';
+    installCloudColor.value = 'rgb(96,133,93)';
+    installButtonResponse.status = 'not-available';
+  } else {
+    installButtonText.value = 'error finding status';
+    installCloudColor.value = '#F90B31';
+    installButtonResponse.status = 'error'; // error message not needed so far
+  }
+  console.log(installButtonResponse);
+  /* installButtonResponse = await api.send('upToDateCheck');
   const response = installButtonResponse;
   if (response.status === 'available') {
     installButtonText.value = 'Install newest version';
@@ -182,9 +199,11 @@ async function setInstallButton() {
     installButtonText.value = 'in dev mode';
     installCloudColor.value = '#111111';
     installCloudColor.value = '#191919';
-  }
+  } */
+  // NOT DOING THIS ANYMORE BC EVERY upToDateCheck this way will download the build already EACH TIME!
 }
 function installBtnClick() {
+  if (!installButtonResponse.status) return;
   if (installButtonResponse.status === 'available') {
     vex.dialog.open({
       message: 'Do you want to start an automated Download and Install?',
@@ -216,16 +235,21 @@ function installBtnClick() {
     });
   }
 }
-
+let installBtnAnimationInterval;
 function animateInstallBtn() {
   installButtonResponse.status = 'downloading';
   document.getElementById('installBtn');
   installButtonText.value = 'Downloading ...';
-  setInterval(function () {
+  installBtnAnimationInterval = setInterval(function () {
     installBtn.classList.toggle('hover');
   }, 490);
 }
-
+function deanimateInstallBtn() {
+  installButtonResponse.status = 'available';
+  clearInterval(installBtnAnimationInterval);
+  installBtn.classList.remove('hover');
+  installButtonText.value = 'Install newest version';
+}
 const updateMe = (element, version) => {
   if (element) {
     // can be null when it gets deleted ...
@@ -233,6 +257,46 @@ const updateMe = (element, version) => {
   }
 };
 
+function compareVersions(version1, version2) {
+  // > 0 --> version1 param is a newer version tag, ...
+  // maybe class worthy
+  // Split the version strings into arrays of numbers
+  const v1Parts = version1.split('.').map(Number);
+  const v2Parts = version2.split('.').map(Number);
+
+  // Pad the shorter version array with zeros
+  while (v1Parts.length < v2Parts.length) v1Parts.push(0);
+  while (v2Parts.length < v1Parts.length) v2Parts.push(0);
+
+  // Compare each part of the version numbers
+  for (let i = 0; i < v1Parts.length; i++) {
+    if (v1Parts[i] > v2Parts[i]) {
+      return 1; // version1 is newer
+    } else if (v1Parts[i] < v2Parts[i]) {
+      return -1; // version2 is newer
+    }
+  }
+
+  return 0; // Both versions are the same
+}
+
+electron.onLog((event, message) => {
+  if (message === 'updateNotYetRecognized') {
+    deanimateInstallBtn();
+    vex.dialog.open({
+      message:
+        'Electron-Updater maybe needs a bit longer to recognize the new release. Feel free to try again in a few minutes.',
+      buttons: [$.extend({}, vex.dialog.buttons.YES, { text: 'close' })],
+    });
+  } else if (message === 'updateNotYetRecognizedError') {
+    deanimateInstallBtn();
+    vex.dialog.open({
+      message:
+        'Electron-Updater sent an error even a new release is detected. Thats unexpected. :(',
+      buttons: [$.extend({}, vex.dialog.buttons.YES, { text: 'close' })],
+    });
+  }
+});
 defineExpose({
   start,
 });

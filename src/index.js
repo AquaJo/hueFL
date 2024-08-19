@@ -67,6 +67,12 @@ if (!gotTheLock) {
 
       // temporary update checking insert
       if (app.isPackaged) {
+        autoUpdater.on('update-not-available', () => {
+          mainWindow.webContents.send('log', `updateNotYetRecognized`);
+        });
+        autoUpdater.on('error', (err) => {
+          mainWindow.webContents.send('log', `updateNotYetRecognizedError`);
+        });
         autoUpdater.on('update-downloaded', async () => {
           console.log('Update heruntergeladen!');
           mainWindow.webContents.send('log', 'Update heruntergeladen!'); // ()
