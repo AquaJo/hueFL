@@ -14,6 +14,10 @@ Check out the [releases](https://github.com/AquaJo/hueFL/releases) and feel free
 Alternatively, you can build it yourself, [here](#build).\
 If you already know your API key and bridge IP, feel free to press `k` for manual login.
 
+### Preview
+
+![](build/preview.png)
+
 # Build
 
 I used [Electron-Builder & Electron-Updater](https://www.electron.build/) for building.\
