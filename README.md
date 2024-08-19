@@ -23,8 +23,10 @@ If you want to compile the [java-code](src/jars/Hue-Ambiance) feel free to use e
 
 # Dev
 
-Dev experience isn't the nicest as of now. You need bundle setting's js-files before `electron .` when working in settings.\
-Also `Ctrl+C` might not stop the java process. Feel free to manually close the application like its end-user intended.
+Dev experience isn't the nicest as of now.\
+You need bundle setting's js-files before `electron .` when working in settings.\
+Also `Ctrl+C` might not stop the java process.\
+Feel free to manually close the application like its end-user intended.
 
 # Credits
 
