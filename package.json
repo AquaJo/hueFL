@@ -10,7 +10,7 @@
     "bundleWatch": "vite build --watch",
     "make": "node copyPackageJson.js && npm run bundle && electron-forge make",
     "dist": "node copyPackageJson.js && npm run bundle && electron-builder",
-    "release": "npm run bundle && electron-builder --publish onTag",
+    "release": "node copyPackageJson.js && npm run bundle && electron-builder --publish onTag",
     "pretty": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\"",
     "prettyAll": "prettier --write .",
     "test": "echo \"Error: no test specified\" && exit 1",
