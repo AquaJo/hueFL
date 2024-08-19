@@ -10,4 +10,4 @@ bracketSpacing: true # Add spaces between brackets in object literals
 #jsxBracketSameLine: false # Put `>` on a new line for multiline JSX
 arrowParens: 'always' # Always include parentheses around arrow function parameters
 proseWrap: 'preserve' # Maintain existing line breaks in Markdown files
-endOfLine: 'lf' # Use 'lf' (Line Feed) for line endings
+endOfLine: 'crlf' # Use 'lf' (Line Feed) for line endings

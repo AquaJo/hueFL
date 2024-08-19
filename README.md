@@ -23,10 +23,13 @@ If you want to compile the [Java code](src/jars/Hue-Ambiance), feel free to use 
 
 # Development
 
-The development experience isn't the smoothest at the moment.\
-You need to bundle the setting's JS files before running `electron .` when working with settings.\
-Also, `Ctrl+C` might not stop the Java process.\
-Feel free to manually close the application as an end-user would.
+The development experience isn't the smoothest at the moment.
+
+- Set `git config core.hooksPath .githooks` before creating commits.
+- You need to bundle the setting's JS files before running `electron .` when working with settings.
+  - This can be automated by e.g. running `npm start`
+- Also, `Ctrl+C` might not stop the Java process.
+  - Feel free to manually close the application as an end-user would.
 
 # Credits
 
