@@ -79,10 +79,8 @@ if (!gotTheLock) {
           mainWindow.webContents.send('log', 'Update heruntergeladen!'); // ()
 
           // delete java process if existent before quitAndInstall!! --> using jarExec.pid
-          deleteJavaProcess();
-          let obj = {};
-          obj.deleteJavaProcess = '1';
-          setCommunicatorJSON([obj, '']);
+          deleteJavaProcess(); // runs async bc java is responding to it in the background --> useful for setting communicator json at least to clean reset val
+          deleteJavaProcessSync(); // delete processes if existent immediately before quitAndInstall
 
           autoUpdater.quitAndInstall();
         });
@@ -135,18 +133,27 @@ if (!gotTheLock) {
     if (!updating_finish) {
       console.log('Exit with code: ' + code);
       deleteJavaProcess();
+      deleteJavaProcessSync();
     }
   });
-  function deleteJavaProcess() {
+
+  function deleteJavaProcessSync() {
     updating_finish = true; // general finish flag in theory
+    if (!jarExec) return;
     try {
       process.kill(jarExec.pid); // could have also used spawn process for jarExec ...
       console.log(`Java process with PID ${jarExec.pid} terminated.`);
     } catch (error) {
-      console.info(
+      console.log(
         `Failed to terminate Java process with PID ${jarExec.pid}: ${error.message}. Maybe you were running an instance without java installed?`
       );
     }
+  }
+  function deleteJavaProcess() {
+    updating_finish = true; // general finish flag in theory
+    let obj = {};
+    obj.deleteJavaProcess = '1';
+    setCommunicatorJSON([obj, '']);
   }
   // This method will be called when Electron has finished
   // initialization and is ready to create browser windows.
@@ -169,9 +176,7 @@ if (!gotTheLock) {
   app.on('window-all-closed', async () => {
     console.log('close detected');
     // communicate with java to delete ongoing java program
-    let obj = {};
-    obj.deleteJavaProcess = '1';
-    setCommunicatorJSON([obj, '']);
+    deleteJavaProcess();
 
     if (process.platform !== 'darwin') app.quit();
   });
@@ -467,15 +472,13 @@ if (!gotTheLock) {
                         return;
                       }
                       mainWindow.webContents.send('noJavaAlert', ''); // also triggered on update due to process killing, but shouldn't matter
-                      console.info(err);
+                      console.log(err);
                       //throw err;
                     }
                     console.log(stdout);
                     console.log(stderr);
                   }
                 );
-                //console.log(jarExec);
-                console.log('jarExec.pid:' + jarExec.pid); // could have also used spawn process for jarExec ...
               }
             } else {
               // TODO: No Java installed

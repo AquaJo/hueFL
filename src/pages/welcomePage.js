@@ -188,7 +188,7 @@ document.addEventListener('keydown', async (event) => {
           callback: async function (data) {
             if (!data) {
               manualLoginOpen = false;
-              open();
+              //open(); // don't open it again if user cancels! (but keep the open of reopening ... )
             } else {
               let ip = data.IP;
               if (ip !== undefined) {
@@ -221,6 +221,7 @@ document.addEventListener('keydown', async (event) => {
                     ) //
                       .then(async (data) => {
                         try {
+                          // bruh fr?
                           console.log(data[0].error);
 
                           manualLoginOpen = false;
@@ -228,8 +229,9 @@ document.addEventListener('keydown', async (event) => {
 
                           console.log('apiKey is incorrect');
                         } catch (error) {
-                          console.log('successfull login');
-                          // error should mean success ;) ...
+                          // the typical "error is a success" ^^ ...
+                          console.log('successfull login'); // ↓
+                          // error should mean success ;) ... --> oh bruh I 'already' recognized / mentioned that back then ...
                           // clearing normal IP input
                           let input = document.getElementById('IPInput');
                           input.value = '';
